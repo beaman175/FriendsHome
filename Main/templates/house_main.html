@@ -59,65 +59,40 @@ Friends Home
 
                 <br/>
 
-                {% for house in enumerate(houses) %}
-                {% if house eq 1 %}
+                {% for house in houses %}
+                {% if forloop.counter|divisibleby:3 %}
                 <div class="row">
-                {% endif %}
+                {% endif%}
+
                       <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail" onclick="goHouseDetail()">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right">$24.99</h4>
-                                <h4><a href="#">First Product</a>
+                                <h4 class="pull-right">&#8361; {{house.price}}</h4>
+                                <h4><a href="#">{{house.title}}</a>
                                 </h4>
-                                <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                                <p>{{house.address}}</p>
                             </div>
                             <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
+                                <p class="pull-right">{{house.hits}} hits</p>
                                 <p>
+                                    {% for i in "x"|rjust:5 %}
+                                    {% if forloop.counter < house.star %}
                                     <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
+                                    {%else%}
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    {%endif%}
+                                    {% endfor %}
+
                                 </p>
                             </div>
                         </div>
                     </div>
-
-                {% if house eq 1 %}
+                {% if forloop.counter|divisibleby:3 %}
                 </div>
                 {% endif %}
+             {% endfor %}
 
-
-                <div class="row">
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail" onclick="goHouseDetail()">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">$24.99</h4>
-                                <h4><a href="#">First Product</a>
-                                </h4>
-                                <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                <!--엔드포-->
-                </div> <!--row end-->
-                <!--엔드포-->
-
-            </div>
         </div>
     </div>     <!-- /.container -->
     <script>
@@ -126,8 +101,8 @@ Friends Home
 
 
         });
-        function goHouseDetail() {
-            location.href = "house/detail/1"
+        function goHouseDetail(houseID) {
+            location.href = "house/detail/"+houseID;
         }
 
     </script>
