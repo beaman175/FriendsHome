@@ -4,46 +4,26 @@ Friends Home
 {% endblock %}
 {% block content %}
 
-    <!-- Page Content -->
-    <div class="container">
-
-        <div class="row">
-
-            <div class="col-md-3">
-                <p class="lead">Shop Name</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
-                </div>
-            </div>
-            {% for house1 in house %}
-            <div class="col-md-9">
-
-                <div class="thumbnail">
-                    <img class="img-responsive" src="http://placehold.it/800x300" alt="">
-                    <div class="caption-full">
-                        <h4 class="pull-right">&#8361; {{house1.price}}</h4>
-                        <h4><a href="#">{{house1.title}}</a>
-                        </h4>
-                        <p>{{house1.address}}</p>
-                        <p>{{house1.content}}</p>
-                    </div>
-                    <div class="ratings">
-                        <p class="pull-right">{{house1.hits}} hits</p>
-                        <p>
-
-                            <span class="glyphicon glyphicon-star"></span> x {{house1.star}}
-
-                        </p>
-                    </div>
-                </div>
-            {% endfor %}
-            </div>
-
-
+{% for house1 in house %}
+    <div class="thumbnail">
+        <img class="img-responsive" src="http://placehold.it/800x300" alt="">
+        <div class="caption-full">
+            <h4 class="pull-right">&#8361; {{house1.price}}</h4>
+            <h4><a href="#">{{house1.title}}</a>
+            </h4>
+            <p>{{house1.address}}</p>
+            <p>{{house1.content}}</p>
         </div>
+        <div class="ratings">
+            <p class="pull-right">{{house1.hits}} hits</p>
+            <p>
 
+                <span class="glyphicon glyphicon-star"></span> x {{house1.star}}
+
+            </p>
+        </div>
     </div>
+{% endfor %}
+
     <!-- /.container -->
-   {% endblock %}
+{% endblock %}

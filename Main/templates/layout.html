@@ -44,7 +44,8 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
+
                     <li>
                         <a href="#">About</a>
                     </li>
@@ -52,7 +53,7 @@
                         <a href="#">Services</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="http://teamfriends.kro.kr">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -60,9 +61,22 @@
         </div>
         <!-- /.container -->
     </nav>
-
-    {% block content %}
-    {% endblock %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="lead">Category</p>
+                <div class="list-group">
+                    <a href="{% url 'Main:write' %}" class="list-group-item">작성하기</a>
+                    <a href="#" class="list-group-item">Category 2</a>
+                    <a href="#" class="list-group-item">Category 3</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                {% block content %}
+                {% endblock %}
+             </div> <!--end col-md-9 -->
+        </div> <!--End First Row-->
+    </div><!-- /.container -->
 
     <div class="container">
 

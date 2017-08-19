@@ -15,3 +15,6 @@ def detail(request, id):
     house = House.objects.filter(id=id)
     context = {'house':house}
     return render(request, 'house_detail.html', context)
+
+def write(request):
+    return render(request, 'house_write.html')

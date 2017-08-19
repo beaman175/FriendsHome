@@ -4,106 +4,91 @@ Friends Home
 {% endblock %}
 {% block content %}
 <style>
-    .thumbnail{
-        cursor : pointer;
-    }
-
-
+.thumbnail{
+    cursor : pointer;
+}
+.thumbnail>img{
+    height : 150px;
+}
 </style>
-    <!-- Page Content -->
-    <div class="container">
 
-        <div class="row">
+    <div class="row carousel-holder">
+        <div class="col-md-12">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                    </div>
+                    <div class="item">
+                        <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                    </div>
+                    <div class="item">
+                        <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
 
-            <div class="col-md-3">
-                <p class="lead">Shop Name</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
+    </div>
+
+    <br/>
+
+    {% for house in houses %}
+    {% if forloop.counter|divisibleby:3 %}
+    <div class="row">
+    {% endif%}
+
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail" onclick="goHouseDetail({{house.id}})">
+                <img class= "home_img" src="{{house.photo.url}}" alt="">
+                <div class="caption">
+                    <h4 class="pull-right">&#8361; {{house.price}}</h4>
+                    <h4><a href="#">{{house.title}}</a>
+                    </h4>
+                    <p>{{house.address}}</p>
+                </div>
+                <div class="ratings">
+                    <p class="pull-right">{{house.hits}} hits</p>
+                    <p>
+                        {% for i in "x"|rjust:5 %}
+                        {% if forloop.counter < house.star %}
+                        <span class="glyphicon glyphicon-star"></span>
+                        {%else%}
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        {%endif%}
+                        {% endfor %}
+                        {{house.photo}}
+                        {{house.photo.url}}
+                    </p>
+
                 </div>
             </div>
-
-            <div class="col-md-9">
-
-                <div class="row carousel-holder">
-
-                    <div class="col-md-12">
-                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                </div>
-                            </div>
-                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
-                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-
-                <br/>
-
-                {% for house in houses %}
-                {% if forloop.counter|divisibleby:3 %}
-                <div class="row">
-                {% endif%}
-
-                      <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail" onclick="goHouseDetail({{house.id}})">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">&#8361; {{house.price}}</h4>
-                                <h4><a href="#">{{house.title}}</a>
-                                </h4>
-                                <p>{{house.address}}</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">{{house.hits}} hits</p>
-                                <p>
-                                    {% for i in "x"|rjust:5 %}
-                                    {% if forloop.counter < house.star %}
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    {%else%}
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    {%endif%}
-                                    {% endfor %}
-
-                                </p>
-
-                            </div>
-                        </div>
-                    </div>
-                {% if forloop.counter|divisibleby:3 %}
-                </div>
-                {% endif %}
-             {% endfor %}
         </div>
-    </div>     <!-- /.container -->
-    <script>
-        $(document).ready(function(){
+    {% if forloop.counter|divisibleby:3 %}
+    </div>
+    {% endif %}
+ {% endfor %}
+
+<script>
+    $(document).ready(function(){
 
 
 
-        });
-        function goHouseDetail(id) {
-            location.href = "house/detail/"+id;
-        }
+    });
+    function goHouseDetail(id) {
+        location.href = "house/detail/"+id;
+    }
 
-    </script>
+</script>
 {% endblock %}
