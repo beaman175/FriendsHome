@@ -7,7 +7,8 @@ urlpatterns = [
     #캐럿은 빈경로를 의미
     url(r'^$', views.index, name = 'Friends Home'),
     url(r'^house/detail/(?P<id>\d+)/$', views.detail),
-    url(r'^house/write/$', views.write, name='write')
+    url(r'^house/write/$', views.write, name='write'),
+    url(r'^house/DoWriteBoard/$',views.register)
     #url(r'^house/detail/(?P<poll_id>\d+)/$', views.detail),
 
 ]

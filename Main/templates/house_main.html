@@ -2,16 +2,24 @@
 {% block title %}
 Friends Home
 {% endblock %}
-{% block content %}
-<style>
-.thumbnail{
-    cursor : pointer;
-}
-.thumbnail>img{
-    height : 150px;
-}
-</style>
 
+{% block style %}
+    <style>
+    .thumbnail{
+        cursor : pointer;
+    }
+    .thumbnail>img{
+        height : 150px;
+    }
+    .slideDiv, .slide-image {
+        width: 100%;
+        height : 300px;
+    }
+
+    </style>
+{% endblock%}
+
+{% block content %}
     <div class="row carousel-holder">
         <div class="col-md-12">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -21,15 +29,11 @@ Friends Home
                     <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner">
-                    <div class="item active">
-                        <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                    {% for rdmObj in rdmList %}
+                    <div class="item slideDiv">
+                        <img class="slide-image" src="{{rdmObj.photo.url}}" alt="">
                     </div>
-                    <div class="item">
-                        <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                    </div>
-                    <div class="item">
-                        <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                    </div>
+                    {% endfor %}
                 </div>
                 <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left"></span>
@@ -39,7 +43,6 @@ Friends Home
                 </a>
             </div>
         </div>
-
     </div>
 
     <br/>
@@ -48,10 +51,9 @@ Friends Home
     {% if forloop.counter|divisibleby:3 %}
     <div class="row">
     {% endif%}
-
           <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail" onclick="goHouseDetail({{house.id}})">
-                <img class= "home_img" src="{{house.photo.url}}" alt="">
+                <img class="slide-image" src="{{house.photo.url}}" alt="">
                 <div class="caption">
                     <h4 class="pull-right">&#8361; {{house.price}}</h4>
                     <h4><a href="#">{{house.title}}</a>
@@ -68,8 +70,6 @@ Friends Home
                         <span class="glyphicon glyphicon-star-empty"></span>
                         {%endif%}
                         {% endfor %}
-                        {{house.photo}}
-                        {{house.photo.url}}
                     </p>
 
                 </div>
@@ -80,15 +80,16 @@ Friends Home
     {% endif %}
  {% endfor %}
 
+{% endblock %}
+{% block footer %}
 <script>
     $(document).ready(function(){
-
+        $('#carousel-example-generic > div > div:nth-child(1)').addClass('active');
 
 
     });
     function goHouseDetail(id) {
         location.href = "house/detail/"+id;
     }
-
 </script>
-{% endblock %}
+{% endblock%}
